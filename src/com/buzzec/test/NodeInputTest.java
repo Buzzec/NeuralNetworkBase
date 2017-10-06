@@ -15,6 +15,6 @@ public class NodeInputTest implements NodeInput{
     }
     @Override
     public String getName(){
-        return "Input Test " + id;
+        return "InputTest:" + id;
     }
 }

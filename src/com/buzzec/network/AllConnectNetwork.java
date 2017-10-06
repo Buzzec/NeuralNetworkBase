@@ -3,6 +3,7 @@ package com.buzzec.network;
 import com.buzzec.exceptions.network.*;
 import com.buzzec.functions.*;
 import com.buzzec.node.*;
+import com.buzzec.utility.*;
 
 import java.io.*;
 import java.util.*;
@@ -13,14 +14,16 @@ public class AllConnectNetwork{
     private double mutationFactor;
     private double mutationChance;
     
-    public AllConnectNetwork(ArrayList<NodeInput> inputs,
-                             boolean useFunctionOnInputs,
-                             Function function,
-                             ArrayList<Integer> structure,
-                             ArrayList<NodeOutput> outputLocations,
-                             long seed,
-                             double mutationFactor,
-                             double mutationChance){
+    public AllConnectNetwork(
+            ArrayList<NodeInput> inputs,
+            boolean useFunctionOnInputs,
+            Function function,
+            ArrayList<Integer> structure,
+            ArrayList<NodeOutput> outputLocations,
+            long seed,
+            double mutationFactor,
+            double mutationChance
+    ){
         random = new Random(seed);
         network = genAllConnectNetwork(inputs,
                                        useFunctionOnInputs,
@@ -31,13 +34,26 @@ public class AllConnectNetwork{
         this.mutationFactor = mutationFactor;
         this.mutationChance = mutationChance;
     }
+    public AllConnectNetwork(
+            String filePath,
+            ArrayList<NodeInput> inputs,
+            boolean useFunctionOnInputs,
+            Function function,
+            ArrayList<NodeOutput> outputLocations,
+            long seed
+    ){
+        genNetworkFromFile(filePath, inputs, useFunctionOnInputs, function, outputLocations);
+        random = new Random(seed);
+    }
     
-    private static ArrayList<ArrayList<Node>> genAllConnectNetwork(ArrayList<NodeInput> inputs,
-                                                                  boolean useFunctionOnInputs,
-                                                                  Function function,
-                                                                  ArrayList<Integer> structure,
-                                                                  ArrayList<NodeOutput> outputLocations,
-                                                                  Random random){
+    private static ArrayList<ArrayList<Node>> genAllConnectNetwork(
+            ArrayList<NodeInput> inputs,
+            boolean useFunctionOnInputs,
+            Function function,
+            ArrayList<Integer> structure,
+            ArrayList<NodeOutput> outputLocations,
+            Random random
+    ){
         if(outputLocations.size() < 1){
             throw new InvalidOutputSize(outputLocations.size());
         }
@@ -70,6 +86,105 @@ public class AllConnectNetwork{
         output.add(last);
         
         return output;
+    }
+    
+    private void genNetworkFromFile(
+            String filepath,
+            ArrayList<NodeInput> inputs,
+            boolean useFunctionOnInputs,
+            Function function,
+            ArrayList<NodeOutput> outputLocations
+    ){
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            
+            ArrayList<ArrayList<Node>> output = new ArrayList<>();
+            ArrayList<Node> next = new ArrayList<>();
+            ArrayList<Double> weights = new ArrayList<>();
+            
+            int inputTracker = 0;
+            int outputTracker = 0;
+            
+            String line;
+            while((line = br.readLine()) != null){
+                ArrayList<String> splitLine = new ArrayList<>();
+                splitLine.addAll(Arrays.asList(line.split(" ")));
+                
+                for(String x : splitLine){
+                    if(x.equals("")){
+                        System.out.print("BLANK LINE");
+                    }
+                    System.out.println(x);
+                }
+                System.out.println("NEW LINE");
+                
+                switch(splitLine.get(0)){
+                    case "":
+                        break;
+                        
+                    case "MutationFactor:":
+                        mutationFactor = Double.parseDouble(splitLine.get(1));
+                        break;
+                        
+                    case "MutationChance:":
+                        mutationChance = Double.parseDouble(splitLine.get(1));
+                        break;
+                        
+                    case "[InputNode]":
+                        next.add(new InputNode(inputs.get(inputTracker++),
+                                useFunctionOnInputs,
+                                function));
+                        break;
+                        
+                    case "[Node]":
+                        weights = new ArrayList<>();
+                        for(int x = 4; x < splitLine.size(); x++){
+                            weights.add(Double.parseDouble(
+                                    splitLine.get(x)
+                                    .replace('[', ' ')
+                                    .replace(']', ' ')
+                                    .replace(',', ' ')
+                            ));
+                        }
+                        next.add(new Node(output.get(output.size() - 1), weights, function));
+                        break;
+                        
+                    case "[OutputNode]":
+                        weights = new ArrayList<>();
+                        for(int x = 6; x < splitLine.size(); x++){
+                            weights.add(Double.parseDouble(
+                                    splitLine.get(x)
+                                            .replace('[', ' ')
+                                            .replace(']', ' ')
+                                            .replace(',', ' ')
+                            ));
+                        }
+                        next.add(new OutputNode(
+                                output.get(output.size() - 1),
+                                weights,
+                                function,
+                                outputLocations.get(outputTracker++)
+                        ));
+                        break;
+                        
+                    default:
+                        if(Utility.isInteger(splitLine.get(0))){
+                            if(next.size() > 0){
+                                output.add(next);
+                                next = new ArrayList<>();
+                            }
+                        }
+                        break;
+                }
+            }
+            if(next.size() > 0){
+                output.add(next);
+            }
+            network = output;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
     
     public void updateNodes(){

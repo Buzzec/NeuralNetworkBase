@@ -8,9 +8,9 @@ import java.util.*;
 
 public class Node{
     private ArrayList<Node> inputs;
-    private ArrayList<Double> inputWeights;
-    protected double output;
-    private Function function;
+    ArrayList<Double> inputWeights;
+    double output;
+    Function function;
     
     public Node(ArrayList<Node> inputs, ArrayList<Double> inputWeights, Function function){
         this.inputs = inputs;
@@ -84,6 +84,7 @@ public class Node{
     
     @Override
     public String toString(){
-        return "[Node] Input Weights: " + inputWeights + " Function: " + function.getClass().getName();
+        return "[Node] Function: " + function.getClass().getName() +
+                " InputWeights: " + inputWeights;
     }
 }

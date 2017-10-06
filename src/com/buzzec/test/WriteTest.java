@@ -6,7 +6,7 @@ import com.buzzec.node.*;
 
 import java.util.*;
 
-public class Test{
+public class WriteTest{
     public static void main(String[] args){
         long first = System.nanoTime();
         

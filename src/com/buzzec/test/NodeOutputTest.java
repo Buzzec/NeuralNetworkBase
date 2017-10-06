@@ -17,6 +17,6 @@ public class NodeOutputTest implements NodeOutput{
     
     @Override
     public String getName(){
-        return "Output Test " + id;
+        return "OutputTest:" + id;
     }
 }
