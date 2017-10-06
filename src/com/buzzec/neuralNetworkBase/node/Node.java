@@ -1,8 +1,8 @@
-package com.buzzec.node;
+package com.buzzec.neuralNetworkBase.node;
 
-import com.buzzec.exceptions.*;
-import com.buzzec.functions.*;
-import com.buzzec.util.*;
+import com.buzzec.neuralNetworkBase.exceptions.*;
+import com.buzzec.neuralNetworkBase.functions.*;
+import com.buzzec.neuralNetworkBase.util.*;
 
 import java.util.*;
 

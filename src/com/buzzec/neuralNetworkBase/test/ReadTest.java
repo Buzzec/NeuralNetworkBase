@@ -1,8 +1,8 @@
-package com.buzzec.test;
+package com.buzzec.neuralNetworkBase.test;
 
-import com.buzzec.functions.*;
-import com.buzzec.network.*;
-import com.buzzec.node.*;
+import com.buzzec.neuralNetworkBase.functions.*;
+import com.buzzec.neuralNetworkBase.network.*;
+import com.buzzec.neuralNetworkBase.node.*;
 
 import java.util.*;
 

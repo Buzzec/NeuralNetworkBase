@@ -1,6 +1,6 @@
-package com.buzzec.test;
+package com.buzzec.neuralNetworkBase.test;
 
-import com.buzzec.node.*;
+import com.buzzec.neuralNetworkBase.node.*;
 
 public class NodeInputTest implements NodeInput{
     private int id;

@@ -1,4 +1,4 @@
-package com.buzzec.node;
+package com.buzzec.neuralNetworkBase.node;
 
 public interface NodeInput{
     double getOutput();

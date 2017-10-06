@@ -1,4 +1,4 @@
-package com.buzzec.util;
+package com.buzzec.neuralNetworkBase.util;
 
 import java.util.*;
 

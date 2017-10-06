@@ -1,7 +1,7 @@
-package com.buzzec.node;
+package com.buzzec.neuralNetworkBase.node;
 
-import com.buzzec.exceptions.*;
-import com.buzzec.functions.*;
+import com.buzzec.neuralNetworkBase.exceptions.*;
+import com.buzzec.neuralNetworkBase.functions.*;
 
 public class InputNode extends Node{
     private NodeInput nodeInput;

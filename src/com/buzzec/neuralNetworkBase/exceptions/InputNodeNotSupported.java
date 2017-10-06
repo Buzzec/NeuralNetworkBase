@@ -1,4 +1,4 @@
-package com.buzzec.exceptions;
+package com.buzzec.neuralNetworkBase.exceptions;
 
 public class InputNodeNotSupported extends RuntimeException{
     public InputNodeNotSupported(String method){

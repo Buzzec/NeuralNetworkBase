@@ -1,4 +1,4 @@
-package com.buzzec.functions;
+package com.buzzec.neuralNetworkBase.functions;
 
 //Experimentally second fastest
 public class Algebraic implements Function{

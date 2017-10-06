@@ -1,4 +1,4 @@
-package com.buzzec.functions;
+package com.buzzec.neuralNetworkBase.functions;
 
 import static java.lang.Math.*;
 

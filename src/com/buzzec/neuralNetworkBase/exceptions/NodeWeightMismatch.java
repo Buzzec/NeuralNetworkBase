@@ -1,4 +1,4 @@
-package com.buzzec.exceptions;
+package com.buzzec.neuralNetworkBase.exceptions;
 
 public class NodeWeightMismatch extends RuntimeException{
     public NodeWeightMismatch(int numNodes, int numWeights){

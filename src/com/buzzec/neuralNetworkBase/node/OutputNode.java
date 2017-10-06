@@ -1,6 +1,6 @@
-package com.buzzec.node;
+package com.buzzec.neuralNetworkBase.node;
 
-import com.buzzec.functions.*;
+import com.buzzec.neuralNetworkBase.functions.*;
 
 import java.util.*;
 

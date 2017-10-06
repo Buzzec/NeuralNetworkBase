@@ -1,4 +1,4 @@
-package com.buzzec.functions;
+package com.buzzec.neuralNetworkBase.functions;
 
 //Experimentally super slow
 public class HyperbolicTangent implements Function{

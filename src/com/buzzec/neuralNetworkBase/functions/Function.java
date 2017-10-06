@@ -1,4 +1,4 @@
-package com.buzzec.functions;
+package com.buzzec.neuralNetworkBase.functions;
 
 public interface Function{
     /**

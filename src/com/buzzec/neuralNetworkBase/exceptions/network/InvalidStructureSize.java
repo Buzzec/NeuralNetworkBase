@@ -1,4 +1,4 @@
-package com.buzzec.exceptions.network;
+package com.buzzec.neuralNetworkBase.exceptions.network;
 
 public class InvalidStructureSize extends RuntimeException{
     public InvalidStructureSize(int size){

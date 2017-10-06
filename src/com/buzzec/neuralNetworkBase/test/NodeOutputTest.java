@@ -1,6 +1,6 @@
-package com.buzzec.test;
+package com.buzzec.neuralNetworkBase.test;
 
-import com.buzzec.node.*;
+import com.buzzec.neuralNetworkBase.node.*;
 
 public class NodeOutputTest implements NodeOutput{
     private double input;
