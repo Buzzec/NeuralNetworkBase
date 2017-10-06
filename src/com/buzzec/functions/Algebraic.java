@@ -1,5 +1,6 @@
 package com.buzzec.functions;
 
+//Experimentally second fastest
 public class Algebraic implements Function{
     @Override
     public double getFunctionOutput(double input){
