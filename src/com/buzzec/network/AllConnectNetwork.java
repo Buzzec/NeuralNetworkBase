@@ -4,6 +4,7 @@ import com.buzzec.exceptions.network.*;
 import com.buzzec.functions.*;
 import com.buzzec.node.*;
 
+import java.io.*;
 import java.util.*;
 
 public class AllConnectNetwork{
@@ -31,7 +32,7 @@ public class AllConnectNetwork{
         this.mutationChance = mutationChance;
     }
     
-    public static ArrayList<ArrayList<Node>> genAllConnectNetwork(ArrayList<NodeInput> inputs,
+    private static ArrayList<ArrayList<Node>> genAllConnectNetwork(ArrayList<NodeInput> inputs,
                                                                   boolean useFunctionOnInputs,
                                                                   Function function,
                                                                   ArrayList<Integer> structure,
@@ -49,6 +50,7 @@ public class AllConnectNetwork{
         }
         output.add(first);
         
+        System.out.println();
         for(int x : structure){
             if(x < 1){
                 throw new InvalidStructureSize(x);
@@ -81,6 +83,42 @@ public class AllConnectNetwork{
         for(int x = 1; x < network.size(); x++){
             for(Node y : network.get(x)){
                 y.mutate(mutationFactor, mutationChance, random);
+            }
+        }
+    }
+    
+    public void printToFile(String fileFolder, String fileName){
+        if(new File(fileFolder).mkdirs()) System.out.println("New folders made.");
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        try{
+            fw = new FileWriter(fileFolder + "\\" + fileName, true);
+            bw = new BufferedWriter(fw);
+            bw.write("MutationFactor: " + mutationFactor + "\n");
+            bw.write("MutationChance: " + mutationChance + "\n");
+            bw.write("\n");
+            for(int x = 0; x < network.size(); x++){
+                bw.write(x + "\n");
+                for(Node y : network.get(x)){
+                    bw.write(y + "\n");
+                }
+                bw.write("\n");
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        finally{
+            try{
+                if(bw != null){
+                    bw.close();
+                }
+                if(fw != null){
+                    fw.close();
+                }
+            }
+            catch(IOException e){
+                e.printStackTrace();
             }
         }
     }

@@ -12,6 +12,7 @@ public class InputNode extends Node{
         super(function);
         this.nodeInput = nodeInput;
         this.useFunction = useFunction;
+        this.function = function;
     }
     
     @Override
@@ -37,5 +38,10 @@ public class InputNode extends Node{
             output = nodeInput.getOutput();
             return output;
         }
+    }
+    
+    @Override
+    public String toString(){
+        return "[InputNode] NodeInput: " + nodeInput.getName() + " Function: " + function.getClass().getName();
     }
 }

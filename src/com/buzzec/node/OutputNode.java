@@ -22,4 +22,9 @@ public class OutputNode extends Node{
         nodeOutput.receiveInput(output);
         return output;
     }
+    
+    @Override
+    public String toString(){
+        return super.toString() + " NodeOutput: " + nodeOutput.getName();
+    }
 }

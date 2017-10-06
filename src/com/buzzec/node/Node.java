@@ -17,7 +17,6 @@ public class Node{
         this.inputWeights = inputWeights;
         checkNodeWeightSize();
         this.function = function;
-        calcOutput();
     }
     public Node(ArrayList<Node> inputs, Random random, Function function){
         this(inputs, genWeights(inputs.size(), random), function);
@@ -63,7 +62,7 @@ public class Node{
         for(int x = 0; x < inputWeights.size(); x++){
             if(random.nextDouble() < mutationChance){
                 changeWeight(inputWeights.get(x) +
-                        (random.nextInt(3) - 1) * mutationFactor, x);
+                        (random.nextDouble() * 2 - 1) * mutationFactor, x);
             }
         }
     }
@@ -81,5 +80,10 @@ public class Node{
         if(inputs.size() != inputWeights.size()){
             throw new NodeWeightMismatch(inputs.size(), inputWeights.size());
         }
+    }
+    
+    @Override
+    public String toString(){
+        return "[Node] Input Weights: " + inputWeights + " Function: " + function.getClass().getName();
     }
 }
